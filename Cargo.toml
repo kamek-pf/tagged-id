@@ -2,6 +2,9 @@
 name = "tagged-id"
 version = "0.1.0"
 edition = "2021"
+authors = ["Bertrand Bousquet <b.kamek@gmail.com>"]
+description = "A zero-cost wrapper adding type-safety to ressource identifiers."
+license = "Unlicense OR MIT"
 
 [features]
 default = ["serde", "smartstring"]
