@@ -2,6 +2,8 @@
 
 A zero-cost wrapper adding type-safety to ressource identifiers.
 
+[![crates.io](https://img.shields.io/crates/v/tagged-id.svg)](https://crates.io/crates/tagged-id)
+
 ## Why ?
 This solves two problems:
 - If two ressources are identified by the same type (a `User` and a `Device` both being identified by a `i32` for instance), they might be swapped by mistake in application code. The compiler cannot help you with this, but it is of course incorrect.
