@@ -1,0 +1,16 @@
+error[E0382]: borrow of moved value: `id1`
+  --> tests/fail/not_copy.rs:14:5
+   |
+11 |     let id1: Id<TestStruct> = "oops".into();
+   |         --- move occurs because `id1` has type `Id<TestStruct>`, which does not implement the `Copy` trait
+12 |     let id2 = id1;
+   |               --- value moved here
+13 |
+14 |     assert_eq!(id1, id2);
+   |     ^^^^^^^^^^^^^^^^^^^^ value borrowed here after move
+   |
+   = note: this error originates in the macro `assert_eq` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+   |
+12 |     let id2 = id1.clone();
+   |                  ++++++++

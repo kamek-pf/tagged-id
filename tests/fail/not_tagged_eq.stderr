@@ -1,0 +1,8 @@
+error[E0308]: mismatched types
+  --> tests/fail/not_tagged_eq.rs:18:21
+   |
+18 |     assert_eq!(id1, id2);
+   |                     ^^^ expected `Id<TestThis>`, found `Id<TestThat>`
+   |
+   = note: expected struct `Id<TestThis>`
+              found struct `Id<TestThat>`

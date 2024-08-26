@@ -1,0 +1,19 @@
+[package]
+name = "tagged-id"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["serde", "smartstring"]
+smartstring = ["dep:smartstring"]
+serde = ["dep:serde", "smartstring?/serde"]
+sqlx = ["dep:sqlx"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"], optional = true }
+smartstring = { version = "1.0", optional = true }
+sqlx = { version = "0.8", optional = true, no-default-features = true }
+
+[dev-dependencies]
+serde_json = "1.0"
+trybuild = "1.0"
