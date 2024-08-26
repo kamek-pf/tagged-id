@@ -1,21 +1,25 @@
 [package]
 name = "tagged-id"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Bertrand Bousquet <b.kamek@gmail.com>"]
 description = "A zero-cost wrapper adding type-safety to ressource identifiers."
 license = "Unlicense OR MIT"
+repository = "https://github.com/kamek-pf/tagged-id"
+homepage = "https://github.com/kamek-pf/tagged-id"
 
 [features]
 default = ["serde", "smartstring"]
 smartstring = ["dep:smartstring"]
 serde = ["dep:serde", "smartstring?/serde"]
-sqlx = ["dep:sqlx"]
+sqlx-postgres = ["dep:sqlx", "sqlx/postgres"]
+sqlx-mysql = ["dep:sqlx", "sqlx/mysql"]
+sqlx-sqlite = ["dep:sqlx", "sqlx/sqlite"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"], optional = true }
 smartstring = { version = "1.0", optional = true }
-sqlx = { version = "0.8", optional = true, no-default-features = true }
+sqlx = { version = "0.8", optional = true, default-features = false }
 
 [dev-dependencies]
 serde_json = "1.0"

@@ -40,10 +40,10 @@ fn main() {
 
 
 `Id<T>` inherits core trait implementations of the inner type. For instance, if `InnerId` is `Copy`, then `Id<T>` is also `Copy`. \
-`Id<T>` is just a newtype wrapper of the inner type, which makes it a zero cost abstraction.
+`Id<T>` is just a newtype wrapper of the inner type with a trait bound, which makes it a zero cost abstraction.
 
 ## Cargo Feature Flags
 - `smartstring`: Enable `From<&str>` instance converting to a [`CompactString`](https://docs.rs/smartstring/latest/smartstring/alias/type.CompactString.html). When disabled, an instance for `String` is enabled instead.
 - `serde`: Enable serde support for `tagged-id` and dependencies that support it like `smartstring`.
-- `sqlx`: Enable [`Encode`](https://docs.rs/sqlx/latest/sqlx/trait.Encode.html) and [`Decode`](https://docs.rs/sqlx/latest/sqlx/trait.Decode.html) instances for transparent use with `sqlx`.
+- `sqlx-{postgres,mysql,sqlite}`: Enable [`Encode`](https://docs.rs/sqlx/latest/sqlx/trait.Encode.html) and [`Decode`](https://docs.rs/sqlx/latest/sqlx/trait.Decode.html) instances for transparent use with the corresponding `sqlx` backend.
 
