@@ -14,32 +14,31 @@ This solves two problems:
 use tagged_id::{Id, Identify};
 
 struct User {
-  id: Id<User>, // id is a i32
-  some_field: String
+    id: Id<User>, // id is a i32
+    some_field: String,
 }
 
-impl Identifiable for User {
-  type InnerId = i32;
+impl Identify for User {
+    type InnerId = i32;
 }
 
 struct Device {
-  id: Id<Device>, // id is also a i32
-  some_value: i32
+    id: Id<Device>, // id is also a i32
+    some_value: i32,
 }
 
-impl Identifiable for Device {
-  type InnerId = i32;
+impl Identify for Device {
+    type InnerId = i32;
 }
 
 fn main() {
-  let user_id: Id<User> = Id::new(42);
-  let device_id: Id<Device> = Id::new(42);
+    let user_id: Id<User> = Id::new(42);
+    let device_id: Id<Device> = Id::new(42);
 
-  // This does not compile since the tags are different.
-  assert_eq!(user_id, device_id);
+    // This does not compile since the tags are different.
+    assert_eq!(user_id, device_id);
 }
 ```
-
 
 `Id<T>` inherits core trait implementations of the inner type. For instance, if `InnerId` is `Copy`, then `Id<T>` is also `Copy`. \
 `Id<T>` is just a newtype wrapper of the inner type with a trait bound, which makes it a zero cost abstraction.
