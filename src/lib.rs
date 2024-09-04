@@ -12,6 +12,9 @@ mod smartstring;
 #[cfg(feature = "serde")]
 mod serde;
 
+#[cfg(feature = "uuid")]
+mod uuid;
+
 mod sqlx;
 
 /// A zero-cost newtype wrapper for your IDs.

@@ -45,6 +45,7 @@ fn main() {
 
 ## Cargo Feature Flags
 - `smartstring`: Enable `From<&str>` instance converting to a [`CompactString`](https://docs.rs/smartstring/latest/smartstring/alias/type.CompactString.html). When disabled, an instance for `String` is enabled instead.
+- `uuid`: Enable `From<Uuid>` instance for convenience.
 - `serde`: Enable serde support for `tagged-id` and dependencies that support it like `smartstring`.
 - `sqlx-{postgres,mysql,sqlite}`: Enable [`Encode`](https://docs.rs/sqlx/latest/sqlx/trait.Encode.html) and [`Decode`](https://docs.rs/sqlx/latest/sqlx/trait.Decode.html) instances for transparent use with the corresponding `sqlx` backend.
 
