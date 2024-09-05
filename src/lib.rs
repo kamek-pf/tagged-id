@@ -238,7 +238,7 @@ mod tests {
     fn tagged_eq_derive() {
         #[derive(Identify)]
         #[id_type(i32)]
-        struct TestStruct();
+        struct TestStruct;
 
         let id1: Id<TestStruct> = 42.into();
         let id2: Id<TestStruct> = 42.into();
