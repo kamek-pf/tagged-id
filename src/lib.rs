@@ -6,6 +6,9 @@ use core::{
     hash::{Hash, Hasher},
 };
 
+extern crate tagged_id_derive;
+pub use tagged_id_derive::Identify;
+
 #[cfg(feature = "smartstring")]
 mod smartstring;
 
@@ -229,5 +232,19 @@ mod tests {
 
         let t = trybuild::TestCases::new();
         t.compile_fail("tests/fail/not_tagged_eq.rs");
+    }
+
+    #[test]
+    fn tagged_eq_derive() {
+        #[derive(Identify)]
+        #[id_type(i32)]
+        struct TestStruct();
+
+        let id1: Id<TestStruct> = 42.into();
+        let id2: Id<TestStruct> = 42.into();
+        let id3: Id<TestStruct> = 101.into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
     }
 }

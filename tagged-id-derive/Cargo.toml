@@ -1,0 +1,17 @@
+[package]
+name = "tagged-id-derive"
+version = "0.2.2"
+edition = "2021"
+authors = ["Bertrand Bousquet <b.kamek@gmail.com>"]
+description = "Interal crate for tagged-id macros"
+license = "Unlicense OR MIT"
+repository = "https://github.com/kamek-pf/tagged-id"
+homepage = "https://github.com/kamek-pf/tagged-id"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "1.0", features = ["full"] }

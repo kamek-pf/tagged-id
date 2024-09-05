@@ -1,5 +1,5 @@
 .env
-/target
+target
 /result
 /wip
 /.direnv
