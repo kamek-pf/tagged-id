@@ -24,17 +24,20 @@ mod sqlx;
 pub struct Id<T: Identify>(pub(crate) T::InnerId);
 
 impl<T: Identify> Id<T> {
+    /// Construct a new Id from a base type.
     pub fn new(id: T::InnerId) -> Id<T> {
         Id(id)
     }
 
+    /// Take the underlying ID out of the newtype wrapper.
     pub fn take(self) -> T::InnerId {
         self.0
     }
 }
 
-/// The Identify trait associates an Id with the ressource it represents.
+/// The Identify trait associates an Id with the resource it represents.
 pub trait Identify {
+    /// Raw ID of the resource.
     type InnerId;
 }
 

@@ -1,13 +1,13 @@
 # `tagged-id`
 
-A zero-cost wrapper adding type-safety to ressource identifiers.
+A zero-cost wrapper adding type-safety to resource identifiers.
 
 [![crates.io](https://img.shields.io/crates/v/tagged-id.svg)](https://crates.io/crates/tagged-id)
 
 ## Why ?
 This solves two problems:
-- If two ressources are identified by the same type (`Foo` and `Bar` both being identified by a `i32` for instance), they might be swapped by mistake in application code. The compiler cannot help you with this, but it is of course incorrect.
-- When writting code that needs to manipulate ressource identifiers, you often need to lookup what the concrete type of the ID is in order to write function signatures and type annotations. In most cases, the nature of the ID does not matter, so it is more convenient to just treat it as an opaque type.
+- If two resources are identified by the same type (`Foo` and `Bar` both being identified by a `i32` for instance), they might be swapped by mistake in application code. The compiler cannot help you with this, but it is of course incorrect.
+- When writting code that needs to manipulate resource identifiers, you often need to lookup what the concrete type of the ID is in order to write function signatures and type annotations. In most cases, the nature of the ID does not matter, so it is more convenient to just treat it as an opaque type.
   
 ## Examples
 ```rust compile_fail
