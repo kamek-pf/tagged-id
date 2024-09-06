@@ -13,15 +13,15 @@ This solves two problems:
 ```rust compile_fail
 use tagged_id::{Id, Identify};
 
-#[derive(Identify)] // note the derive macro
-#[tagged_id(i32)]   // this attribute specifies the underlying type
+#[derive(Id)]     // note the derive macro
+#[tagged_id(i32)] // this attribute specifies the underlying type
 struct Foo {
-    id: Id<Foo>,    // id is a i32
+    id: Id<Foo>,  // id is a i32
     some_field: String,
 }
 
 struct Bar {
-    id: Id<Bar>,    // id is also a i32, see impl below
+    id: Id<Bar>,  // id is also a i32, see impl below
     some_value: i32,
 }
 

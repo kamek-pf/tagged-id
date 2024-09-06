@@ -3,7 +3,7 @@ use quote::quote;
 use syn::{parse_macro_input, DeriveInput, Path};
 
 /// Derive the Identify trait with a `#[tagged_id(T)]` attribute.
-#[proc_macro_derive(Identify, attributes(tagged_id))]
+#[proc_macro_derive(Id, attributes(tagged_id))]
 pub fn derive_identify(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
 
@@ -19,7 +19,7 @@ pub fn derive_identify(input: TokenStream) -> TokenStream {
         .expect("tagged_id attribute is required");
 
     let expanded = quote! {
-        impl Identify for #name {
+        impl tagged_id::Identify for #name {
             type InnerId = #tagged_id;
         }
     };

@@ -1,7 +1,7 @@
-use tagged_id::{Id, Identify};
+use tagged_id::Id;
 
 fn main() {
-    #[derive(Identify)]
+    #[derive(Id)]
     #[tagged_id(String)]
     struct TestStruct();
 

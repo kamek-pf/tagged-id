@@ -7,7 +7,7 @@ use core::{
 };
 
 #[cfg(feature = "derive")]
-pub use tagged_id_derive::Identify;
+pub use tagged_id_derive::Id;
 
 #[cfg(feature = "smartstring")]
 mod smartstring;
@@ -190,6 +190,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate as tagged_id;
 
     #[test]
     fn copy() {
@@ -246,7 +247,7 @@ mod tests {
 
     #[test]
     fn tagged_eq_derive_i32() {
-        #[derive(Identify)]
+        #[derive(Id)]
         #[tagged_id(i32)]
         struct TestStruct;
 
@@ -260,7 +261,7 @@ mod tests {
 
     #[test]
     fn tagged_eq_derive_string() {
-        #[derive(Identify)]
+        #[derive(Id)]
         #[tagged_id(String)]
         struct TestStruct;
 
@@ -274,7 +275,7 @@ mod tests {
 
     #[test]
     fn tagged_eq_derive_string_path() {
-        #[derive(Identify)]
+        #[derive(Id)]
         #[tagged_id(std::string::String)]
         struct TestStruct;
 

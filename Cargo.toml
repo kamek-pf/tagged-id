@@ -3,7 +3,7 @@ members = [ "tagged-id-derive" ]
 
 [package]
 name = "tagged-id"
-version = "0.2.2"
+version = "0.3.0"
 edition = "2021"
 authors = ["Bertrand Bousquet <b.kamek@gmail.com>"]
 description = "A zero-cost wrapper adding type-safety to ressource identifiers."
