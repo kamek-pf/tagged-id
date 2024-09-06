@@ -1,8 +1,5 @@
 [workspace]
-members = [
-    "tagged-id-derive",
-]
-
+members = [ "tagged-id-derive" ]
 
 [package]
 name = "tagged-id"
@@ -10,12 +7,13 @@ version = "0.2.2"
 edition = "2021"
 authors = ["Bertrand Bousquet <b.kamek@gmail.com>"]
 description = "A zero-cost wrapper adding type-safety to ressource identifiers."
-license = "Unlicense OR MIT"
+license = "MIT"
 repository = "https://github.com/kamek-pf/tagged-id"
 homepage = "https://github.com/kamek-pf/tagged-id"
 
 [features]
-default = ["serde", "smartstring", "uuid"]
+default = ["derive"]
+derive = ["tagged-id-derive", "serde?/derive"]
 smartstring = ["dep:smartstring"]
 uuid = ["dep:uuid"]
 serde = ["dep:serde", "smartstring?/serde", "uuid?/serde"]
@@ -24,11 +22,11 @@ sqlx-mysql = ["dep:sqlx", "sqlx/mysql"]
 sqlx-sqlite = ["dep:sqlx", "sqlx/sqlite"]
 
 [dependencies]
-serde = { version = "1.0", features = ["derive"], optional = true }
+serde = { version = "1.0", optional = true }
 smartstring = { version = "1.0", optional = true }
 sqlx = { version = "0.8", optional = true, default-features = false }
 uuid = { version = "1.10", optional = true, default-features = false }
-tagged-id-derive = {path = "tagged-id-derive"}
+tagged-id-derive = { path = "tagged-id-derive", optional = true }
 
 [dev-dependencies]
 serde_json = "1.0"

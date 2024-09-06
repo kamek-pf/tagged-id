@@ -3,3 +3,4 @@ target
 /result
 /wip
 /.direnv
+Cargo.lock

@@ -6,7 +6,7 @@ use core::{
     hash::{Hash, Hasher},
 };
 
-extern crate tagged_id_derive;
+#[cfg(feature = "derive")]
 pub use tagged_id_derive::Identify;
 
 #[cfg(feature = "smartstring")]
@@ -119,6 +119,16 @@ where
 {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.0.hash(state);
+    }
+}
+
+impl<T> Default for Id<T>
+where
+    T: Identify,
+    T::InnerId: Default,
+{
+    fn default() -> Self {
+        Id(T::InnerId::default())
     }
 }
 
@@ -235,14 +245,42 @@ mod tests {
     }
 
     #[test]
-    fn tagged_eq_derive() {
+    fn tagged_eq_derive_i32() {
         #[derive(Identify)]
-        #[id_type(i32)]
+        #[tagged_id(i32)]
         struct TestStruct;
 
         let id1: Id<TestStruct> = 42.into();
         let id2: Id<TestStruct> = 42.into();
         let id3: Id<TestStruct> = 101.into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
+    }
+
+    #[test]
+    fn tagged_eq_derive_string() {
+        #[derive(Identify)]
+        #[tagged_id(String)]
+        struct TestStruct;
+
+        let id1: Id<TestStruct> = "42".into();
+        let id2: Id<TestStruct> = "42".into();
+        let id3: Id<TestStruct> = "101".into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
+    }
+
+    #[test]
+    fn tagged_eq_derive_string_path() {
+        #[derive(Identify)]
+        #[tagged_id(std::string::String)]
+        struct TestStruct;
+
+        let id1: Id<TestStruct> = "42".into();
+        let id2: Id<TestStruct> = "42".into();
+        let id3: Id<TestStruct> = "101".into();
 
         assert_eq!(id1, id2);
         assert_ne!(id1, id3);
