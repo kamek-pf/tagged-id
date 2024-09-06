@@ -37,7 +37,7 @@ impl<T: Identify> Id<T> {
 
 /// The Identify trait associates an Id with the resource it represents.
 pub trait Identify {
-    /// Raw ID of the resource.
+    /// ID type of the resource.
     type InnerId;
 }
 
