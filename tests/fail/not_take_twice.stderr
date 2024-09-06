@@ -1,12 +1,12 @@
 error[E0382]: use of moved value: `id1`
-  --> tests/fail/not_take_twice.rs:14:16
+  --> tests/fail/not_take_twice.rs:13:16
    |
-11 |     let id1: Id<TestStruct> = "oops".into();
+10 |     let id1: Id<TestStruct> = "oops".into();
    |         --- move occurs because `id1` has type `Id<TestStruct>`, which does not implement the `Copy` trait
-12 |     let id2 = id1.take();
+11 |     let id2 = id1.take();
    |                   ------ `id1` moved due to this method call
-13 |
-14 |     assert_eq!(id1.take(), id2);
+12 |
+13 |     assert_eq!(id1.take(), id2);
    |                ^^^ value used here after move
    |
 note: `Id::<T>::take` takes ownership of the receiver `self`, which moves `id1`
@@ -16,5 +16,5 @@ note: `Id::<T>::take` takes ownership of the receiver `self`, which moves `id1`
    |                 ^^^^
 help: you can `clone` the value and consume it, but this might not be your desired behavior
    |
-12 |     let id2 = id1.clone().take();
+11 |     let id2 = id1.clone().take();
    |                  ++++++++

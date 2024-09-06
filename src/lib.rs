@@ -6,6 +6,9 @@ use core::{
     hash::{Hash, Hasher},
 };
 
+#[cfg(feature = "derive")]
+pub use tagged_id_derive::Id;
+
 #[cfg(feature = "smartstring")]
 mod smartstring;
 
@@ -21,17 +24,20 @@ mod sqlx;
 pub struct Id<T: Identify>(pub(crate) T::InnerId);
 
 impl<T: Identify> Id<T> {
+    /// Construct a new Id from a base type.
     pub fn new(id: T::InnerId) -> Id<T> {
         Id(id)
     }
 
+    /// Take the underlying ID out of the newtype wrapper.
     pub fn take(self) -> T::InnerId {
         self.0
     }
 }
 
-/// The Identify trait associates an Id with the ressource it represents.
+/// The Identify trait associates an Id with the resource it represents.
 pub trait Identify {
+    /// ID type of the resource.
     type InnerId;
 }
 
@@ -119,6 +125,16 @@ where
     }
 }
 
+impl<T> Default for Id<T>
+where
+    T: Identify,
+    T::InnerId: Default,
+{
+    fn default() -> Self {
+        Id(T::InnerId::default())
+    }
+}
+
 impl<T> From<u8> for Id<T>
 where
     T: Identify<InnerId = u8>,
@@ -177,6 +193,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate as tagged_id;
 
     #[test]
     fn copy() {
@@ -229,5 +246,47 @@ mod tests {
 
         let t = trybuild::TestCases::new();
         t.compile_fail("tests/fail/not_tagged_eq.rs");
+    }
+
+    #[test]
+    fn tagged_eq_derive_i32() {
+        #[derive(Id)]
+        #[tagged_id(i32)]
+        struct TestStruct;
+
+        let id1: Id<TestStruct> = 42.into();
+        let id2: Id<TestStruct> = 42.into();
+        let id3: Id<TestStruct> = 101.into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
+    }
+
+    #[test]
+    fn tagged_eq_derive_string() {
+        #[derive(Id)]
+        #[tagged_id(String)]
+        struct TestStruct;
+
+        let id1: Id<TestStruct> = "42".into();
+        let id2: Id<TestStruct> = "42".into();
+        let id3: Id<TestStruct> = "101".into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
+    }
+
+    #[test]
+    fn tagged_eq_derive_string_path() {
+        #[derive(Id)]
+        #[tagged_id(std::string::String)]
+        struct TestStruct;
+
+        let id1: Id<TestStruct> = "42".into();
+        let id2: Id<TestStruct> = "42".into();
+        let id3: Id<TestStruct> = "101".into();
+
+        assert_eq!(id1, id2);
+        assert_ne!(id1, id3);
     }
 }

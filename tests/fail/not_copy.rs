@@ -1,12 +1,9 @@
-use smartstring::alias::CompactString;
-use tagged_id::{Id, Identify};
+use tagged_id::Id;
 
 fn main() {
+    #[derive(Id)]
+    #[tagged_id(String)]
     struct TestStruct();
-
-    impl Identify for TestStruct {
-        type InnerId = CompactString;
-    }
 
     let id1: Id<TestStruct> = "oops".into();
     let id2 = id1;
