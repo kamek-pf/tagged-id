@@ -39,7 +39,7 @@ fn main() {
 }
 ```
 
-`Id<T>` inherits core trait implementations of the inner type. For instance, if `InnerId` is `Copy`, then `Id<T>` is also `Copy`. \
+`Id<T>` inherits relevant core trait implementations of the inner type. For instance, if `InnerId` is `Copy`, then `Id<T>` is also `Copy`. \
 `Id<T>` is just a newtype wrapper of the inner type with a trait bound, which makes it a zero cost abstraction.
 
 ## Cargo Feature Flags
